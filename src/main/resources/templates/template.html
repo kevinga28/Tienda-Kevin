@@ -3,8 +3,8 @@
 <head th:fragment="head">
     <title>Zay Shop eCommerce HTML CSS Template</title>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../img/apple-icon.png" rel="apple-touch-icon">
     <link href="../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
@@ -16,10 +16,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap"
           rel="stylesheet">
     <link href="../css/fontawesome.min.css" rel="stylesheet">
-    <!--
-    TemplateMo 559 Zay Shop
-    https://templatemo.com/tm-559-zay-shop
-    -->
 </head>
 <body>
 
@@ -28,7 +24,7 @@
     <div class="container d-flex justify-content-between align-items-center">
 
         <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
-            Tienda de kev
+            Tienda de Kevin
         </a>
 
         <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
@@ -42,16 +38,10 @@
             <div class="flex-fill">
                 <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="@{/index}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="shop.html">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
+                        <a class="nav-link" th:href="@{/admin}">Admin</a>
                     </li>
                 </ul>
             </div>
@@ -100,7 +90,7 @@
                     </div>
                     <div class="col-lg-6 mb-0 d-flex align-items-center">
                         <div class="text-align-left align-self-center">
-                            <h1 class="h1 text-success"><b>Zay</b> eCommerce</h1>
+                            <h1 class="h1 text-success"><b>Super Kev</b> eCommerce</h1>
                             <h3 class="h2">Tiny and Perfect eCommerce Template</h3>
                             <p>
                                 Zay Shop is an eCommerce HTML5 CSS template with latest version of Bootstrap 5 (beta 1).
@@ -373,7 +363,7 @@
                 <div class="input-group mb-2">
                     <input class="form-control bg-dark border-light" id="subscribeEmail" placeholder="Email address"
                            type="text">
-                    <div class="input-group-text btn-success text-light">Subscribe</div>
+                    <div class="input-group-text btn-success text-light">Por si te quieres subscribir</div>
                 </div>
             </div>
         </div>
@@ -384,8 +374,7 @@
             <div class="row pt-2">
                 <div class="col-12">
                     <p class="text-left text-light">
-                        Copyright &copy; 2021 Company Name
-                        | Designed by <a href="https://templatemo.com" rel="sponsored" target="_blank">TemplateMo</a>
+                        Copyright &copy; 2023 Kevin Garro
                     </p>
                 </div>
             </div>
@@ -400,6 +389,8 @@
     <script src="../js/jquery-1.11.0.min.js"></script>
     <script src="../js/jquery-migrate-1.2.1.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/popper.min.js"></script>
     <script src="../js/templatemo.js"></script>
     <script src="../js/custom.js"></script>
 </div>

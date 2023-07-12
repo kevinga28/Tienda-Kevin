@@ -17,7 +17,7 @@ public class ProjectConfig  implements WebMvcConfigurer {
 
     /* localeResolver se utiliza para crear una sesión de cambio de idioma*/
     //Funciones que ejecuta springboot a la hora de configurarse
-    
+
     @Bean
     public LocaleResolver localeResolver() {
         var slr = new SessionLocaleResolver();

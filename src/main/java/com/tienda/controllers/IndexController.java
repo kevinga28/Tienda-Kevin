@@ -16,7 +16,7 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(Model model) {
-        var productos = this.productService.getAllProducts();
+        var productos = this.productService.getAll();
         model.addAttribute("products", productos);
         return "index";
     }
