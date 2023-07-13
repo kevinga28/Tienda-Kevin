@@ -4,12 +4,27 @@
 <body>
 <div th:insert="~{template.html :: nav}"></div>
 <section class="container py-5">
+    <form>
+        <div class="form-group">
+            <label for="inputLowerPrice">Lower price</label>
+            <input aria-describedby="lowerPrice" class="form-control" id="inputLowerPrice"
+                   placeholder="Lower price to search"
+                   type="number">
+        </div>
+        <div class="form-group">
+            <label for="inputHigherPrice">Higher price</label>
+            <input aria-describedby="higherPrice" class="form-control" id="inputHigherPrice"
+                   placeholder="Higher price to search"
+                   type="number">
+        </div>
+        <a class="btn btn-primary" href="#" id="btnSearch">Search</a>
+    </form>
+    <button class="btn btn-primary open-modal" data-bs-target="#productModal"
+            data-bs-toggle="modal" type="button">
+        Create new product
+    </button>
     <div class="row text-center pt-3">
         <div class="col-lg-6 m-auto">
-            <button class="btn btn-primary open-modal" data-bs-target="#productModal"
-                    data-bs-toggle="modal" type="button">
-                Create new product
-            </button>
             <table class="table">
                 <thead>
                 <tr>
@@ -43,7 +58,6 @@
                 </tr>
                 </tbody>
             </table>
-
         </div>
     </div>
     <!-- this is the modal-->
@@ -88,7 +102,7 @@
                                    type="number">
                         </div>
                         <div class="form-group">
-                            <label for="existencias">Excistencias</label>
+                            <label for="existencias">Existencias</label>
                             <input class="form-control" id="existencias" placeholder="Excistencias"
                                    type="number">
                         </div>
@@ -107,11 +121,9 @@
             </div>
         </div>
     </div>
-
 </section>
 <div th:insert="~{template.html :: footer}"></div>
 <div th:insert="~{template.html :: scripts}"></div>
-
 <!-- This section is really important cause we are asssigning the list of products loaded in the model, into the js -->
 <script th:inline="javascript">
     /*<![CDATA[*/
@@ -119,7 +131,6 @@
     productDefault = /*[[${productDefault}]]*/ 'default';
     /*]]>*/
 </script>
-
 <script src="../js/views/product.js"></script>
 <script src="../js/views/baseCRUD.js"></script>
 </body>
