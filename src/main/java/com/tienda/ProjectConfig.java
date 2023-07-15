@@ -58,34 +58,35 @@ public class ProjectConfig  implements WebMvcConfigurer {
     /* Los siguiente métodos son para implementar el tema de seguridad dentro del proyecto */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("index");
+        registry.addViewController("/").setViewName("login");
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/login").setViewName("login");
-          registry.addViewController("/product").setViewName("product");
-            registry.addViewController("/category").setViewName("category");
-              registry.addViewController("/admin").setViewName("admin");
-        
+         
  }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((request) -> request
-                .requestMatchers("/login","/index","/product/**",
-                        "/admin/**","/category/**","/js/**","/webfonts/**","/css/**","/img/**","/icons/**")
+                .requestMatchers("/login","/index",
+                        "/js/**","/webfonts/**","/css/**", "/index","/product",
+                        "/category","/admin",
+                        "/img/**","/icons/**","/ccs.views/**","/js.views/**")
                         .permitAll()
                 .requestMatchers(
-                        "/index","/product",
-                        "/category/**","/admin/**"
+                        "/","/index**/","/product/save**","/product/delete**",
+                        "/product**/Create new product","/product**/edit",
+                        "/category**/","/admin**/"
                 ).hasRole("ADMIN")
        
                 .requestMatchers(
-                         "/index",
-                        "/product",
-                        "/category",
-                        "/admin"
+                        "/",
+                        "/index**",
+                        "/product**",
+                        "/category**",
+                        "/admin**"
                      
                 ).hasAnyRole("ADMIN", "VENDEDOR")
-                .requestMatchers("/index/product")
+                .requestMatchers("/","/index**","/product**")
                 .hasRole("USER")
                 )
                 .formLogin((form) -> form

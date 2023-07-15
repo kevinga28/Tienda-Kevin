@@ -14,7 +14,7 @@
 	<name>Tienda</name>
 	<description>Proyecto del Curso web y patrones</description>
 	<properties>
-		<java.version>19</java.version>
+		<java.version>20</java.version>
 	</properties>
         
 	<dependencies>
@@ -60,6 +60,17 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.33</version>
 		</dependency>
+   <!--<dependency>
+        <groupId>com.google.firebase</groupId>
+        <artifactId>firebase-admin</artifactId>
+        <version>9.1.1</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.google.firebase</groupId>
+        <artifactId>firebase-database</artifactId>
+        <version>9.1.1</version>
+    </dependency> -->
 	</dependencies>
 	<build>
 		<plugins>
