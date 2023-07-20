@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html th:attr="lang=${lang}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html th:attr="lang=${lang}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6“
+>
 <head th:fragment="head">
     <title>Zay Shop eCommerce HTML CSS Template</title>
     <meta charset="utf-8">
@@ -36,13 +37,15 @@
         <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
              id="templatemo_main_nav">
             <div class="flex-fill">
-                <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_VENDEDOR')" sec:authorize="!isAuthenticated">
                     <li class="nav-item">
                         <a class="nav-link" href="@{/index}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/admin}">Admin</a>
+                    <li class="nav-item"
+>
+                        <a class="nav-link"sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">Admin</a>
                     </li>
+
                 </ul>
             </div>
             <div class="navbar align-self-center d-flex">

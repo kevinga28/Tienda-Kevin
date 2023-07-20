@@ -11,11 +11,12 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.util.Locale;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
@@ -63,58 +64,26 @@ public class ProjectConfig  implements WebMvcConfigurer {
         registry.addViewController("/login").setViewName("login");
          
  }
-    @Bean
+      @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests((request) -> request
-                .requestMatchers("/login","/index",
-                        "/js/**","/webfonts/**","/css/**", "/index","/product",
-                        "/category","/admin",
-                        "/img/**","/icons/**","/ccs.views/**","/js.views/**")
+        http.authorizeHttpRequests((request) -> request
+                        .requestMatchers("/", "/index", "/errores/**", "/js/**", "/css/**", "/icons/**", "/img/**", "/webfonts/**")
                         .permitAll()
-                .requestMatchers(
-                        "/","/index**/","/product/save**","/product/delete**",
-                        "/product**/Create new product","/product**/edit",
-                        "/category**/","/admin**/"
-                ).hasRole("ADMIN")
-       
-                .requestMatchers(
-                        "/",
-                        "/index**",
-                        "/product**",
-                        "/category**",
-                        "/admin**"
-                     
-                ).hasAnyRole("ADMIN", "VENDEDOR")
-                .requestMatchers("/","/index**","/product**")
-                .hasRole("USER")
-                )
-                .formLogin((form) -> form
-                .loginPage("/login").permitAll())
-                .logout((logout) -> logout.permitAll());
+                        .requestMatchers("/product/**", "/category/**", "/api/**","/admin/**")
+                        .hasRole("ADMIN"))
+                .formLogin((form) -> form.loginPage("/login")
+                        .permitAll()
+                        .defaultSuccessUrl("/", true))
+                .logout(LogoutConfigurer::permitAll)
+                .csrf().disable().cors();//this line is important to allow ajax request from the js
         return http.build();
     }
-    /* El siguiente método se utiliza para completar la clase no es 
-    realmente funcional, la próxima semana se reemplaza con usuarios de BD */    
-    @Bean
-    public UserDetailsService users() {
-        UserDetails admin = User.builder()
-                .username("juan")
-                .password("{noop}123")
-                .roles("USER", "VENDEDOR", "ADMIN")
-                .build();
-        UserDetails sales = User.builder()
-                .username("rebeca")
-                .password("{noop}456")
-                .roles("USER", "VENDEDOR")
-                .build();
-        UserDetails user = User.builder()
-                .username("pedro")
-                .password("{noop}789")
-                .roles("USER")
-                .build();
-        return new InMemoryUserDetailsManager(user, sales, admin);
-    }
+     @Autowired
+    private UserDetailsService userDetailsService;
 
+    @Autowired
+    public void configurerGlobal(AuthenticationManagerBuilder build) throws Exception {
+        build.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+    }
 
 }

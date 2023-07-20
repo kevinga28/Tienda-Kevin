@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html th:attr="lang=${lang}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html th:attr="lang=${lang}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6“
+>
 <head th:insert="~{template.html :: head}"></head>
 <body>
 <div th:insert="~{template.html :: nav}"></div>
 <section class="container py-5">
     <form>
-        <div class="form-group">
+        <div class="form-group" sec:authorize="hasRole('ROLE_ADMIN')
+>
             <label for="inputLowerPrice">Lower price</label>
             <input aria-describedby="lowerPrice" class="form-control" id="inputLowerPrice"
                    placeholder="Lower price to search"
                    type="number">
         </div>
-        <div class="form-group">
+        <div class="form-group"sec:authorize="hasRole('ROLE_ADMIN')
+>
             <label for="inputHigherPrice">Higher price</label>
             <input aria-describedby="higherPrice" class="form-control" id="inputHigherPrice"
                    placeholder="Higher price to search"
@@ -23,7 +26,8 @@
             data-bs-toggle="modal" type="button">
         Create new product
     </button>
-    <div class="row text-center pt-3">
+    <div class="row text-center pt-3" sec:authorize="hasRole('ROLE_ADMIN')
+>
         <div class="col-lg-6 m-auto">
             <table class="table">
                 <thead>
@@ -45,7 +49,8 @@
                     <td><span th:text="${product.precio}"> </span></td>
                     <td><img alt="..." class="card-img-top" th:src="${product.ruta_imagen}">
                     </td>
-                    <td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')
+>
                         <button class="btn btn-primary open-modal" data-bs-target="#productModal" data-bs-toggle="modal"
                                 th:attr="idProduct=${product.id}" type="button">
                             edit

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html th:attr="lang=${lang}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html th:attr="lang=${lang}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6“
+>
 <head th:insert="~{template.html :: head}"></head>
 <body>
 <div th:insert="~{template.html :: nav}"></div>
 <section class="container py-5">
-    <div class="row text-center pt-3">
+    <div class="row text-center pt-3" sec:authorize="hasRole('ROLE_ADMIN')
+>
         <div class="col-lg-6 m-auto">
             <button class="btn btn-primary open-modal" data-bs-target="#Modal"
                     data-bs-toggle="modal" type="button">
@@ -24,7 +26,8 @@
                     <td><span th:text="${category.descripcion}"> </span></td>
                     <td><img alt="..." class="card-img-top" th:src="${category.ruta_imagen}">
                     </td>
-                    <td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')
+>
                         <button class="btn btn-primary open-modal" data-bs-target="#Modal" data-bs-toggle="modal"
                                 th:attr="idCategory=${category.id}" type="button">
                             edit
