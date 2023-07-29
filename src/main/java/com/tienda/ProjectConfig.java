@@ -1,27 +1,27 @@
 package com.tienda;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-
-import java.util.Locale;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+
+import java.util.Locale;
 
 @Configuration //Decorador or tag
-public class ProjectConfig  implements WebMvcConfigurer {
+public class ProjectConfig implements WebMvcConfigurer {
 
     /* localeResolver se utiliza para crear una sesión de cambio de idioma*/
     //Funciones que ejecuta springboot a la hora de configurarse
@@ -56,18 +56,20 @@ public class ProjectConfig  implements WebMvcConfigurer {
         messageSource.setDefaultEncoding("ISO-8859-1");
         return messageSource;
     }
-    /* Los siguiente métodos son para implementar el tema de seguridad dentro del proyecto */
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("login");
+        registry.addViewController("/").setViewName("index");
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/login").setViewName("login");
-         
- }
-      @Bean
+        registry.addViewController("/admin").setViewName("admin");
+        registry.addViewController("/product").setViewName("product");
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((request) -> request
-                        .requestMatchers("/", "/index", "/errores/**", "/js/**", "/css/**", "/icons/**", "/img/**", "/webfonts/**")
+                        .requestMatchers("/", "/index", "/errores/**", "/js/**", "/css/**", "/icons/**", "/img/**", "/webfonts/**","/user")
                         .permitAll()
                         .requestMatchers("/product/**", "/category/**", "/api/**","/admin/**")
                         .hasRole("ADMIN"))
@@ -78,7 +80,9 @@ public class ProjectConfig  implements WebMvcConfigurer {
                 .csrf().disable().cors();//this line is important to allow ajax request from the js
         return http.build();
     }
-     @Autowired
+
+
+    @Autowired
     private UserDetailsService userDetailsService;
 
     @Autowired

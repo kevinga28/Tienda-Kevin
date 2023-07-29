@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html th:attr="lang=${lang}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6“
->
+<html th:attr="lang=${lang}" 
+      xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      ​​xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    
 <head th:insert="~{template.html :: head}"></head>
 <body>
 <div th:insert="~{template.html :: nav}"></div>
 <div th:insert="~{template.html :: featured-product}"></div>
 
 <section class="container py-5">
-    <div class="row text-center pt-3" sec:authorize="hasRole('ROLE_ADMIN')
->
+    <div class="row text-center pt-3">
         <div class="col-lg-6 m-auto">
             <table class="table">
                 <thead>

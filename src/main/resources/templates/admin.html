@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html th:attr="lang=${lang}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6“
->
+<html th:attr="lang=${lang}" 
+      xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      ​​xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    
 <head th:insert="~{template.html :: head}"></head>
 <link th:href="@{/css/views/admin.css}" rel="stylesheet">
 <body>
 <div th:insert="~{template.html :: nav}"></div>
 <section class="container mw-100">
-    <div class="container button-container" sec:authorize="hasRole('ROLE_ADMIN')
->
+    <div class="container button-container">
         <div class="row">
             <div class="col-sm d-flex justify-content-center text-center" >
                 <a th:href="@{/product}">
@@ -32,6 +34,15 @@
                     <div class="backgrounds justify-content-center">
                         <h2>Invoices</h2>
                         <img th:src="@{/icons/icons8-receipt-96.png}"
+                             alt="delivery-settings"/>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm d-flex justify-content-center text-center">
+                <a th:href="@{/user}">
+                    <div class="backgrounds justify-content-center">
+                        <h2>Users</h2>
+                         <img th:src="@{/icons/icons8-product-management-96.png}"
                              alt="delivery-settings"/>
                     </div>
                 </a>

@@ -20,5 +20,4 @@ public class IndexController {
         model.addAttribute("products", productos);
         return "index";
     }
-    
 }
