@@ -59,7 +59,7 @@ public class ProjectConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("index");
+        registry.addViewController("/").setViewName("login");
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/admin").setViewName("admin");
@@ -69,7 +69,8 @@ public class ProjectConfig implements WebMvcConfigurer {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((request) -> request
-                        .requestMatchers("/", "/index", "/errores/**", "/js/**", "/css/**", "/icons/**", "/img/**", "/webfonts/**","/user")
+                        .requestMatchers("/", "/index", "/errores/**", "/js/**", "/css/**", "/icons/**", "/img/**", 
+                                "/webfonts/**","/user","/registro")
                         .permitAll()
                         .requestMatchers("/product/**", "/category/**", "/api/**","/admin/**")
                         .hasRole("ADMIN"))
