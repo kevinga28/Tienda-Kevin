@@ -1,6 +1,7 @@
 package com.tienda.entities;
 
 import jakarta.persistence.*;
+
 @Entity
 @Table(name = "producto")
 public class Product {
@@ -35,8 +36,6 @@ public class Product {
     public void setId(Integer id_producto) {
         this.id = id_producto;
     }
-
-
 
     public String getDescripcion() {
         return descripcion;
