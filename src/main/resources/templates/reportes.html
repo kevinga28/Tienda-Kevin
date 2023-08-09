@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html th:attr="lang=${lang}" 
+      xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      ​​xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    
+<head th:insert="~{template.html :: head}"></head>
+
+<link th:href="@{/css/views/reportes.css}" rel="stylesheet">
+    <body>
+        <div th:insert="~{template.html :: nav}"></div>
+        <div class="container">
+    
+            <div class="row"></div>
+            <div class="row row-cols-6" >
+                <a th:href="@{/}" class="btn btn-primary">
+                    <i class='fas fa-reply'></i>Volver</a>
+            </div>
+            <div class="row"></div>
+            <div class="row row-cols-3">
+                <div class="card">
+                    <div class="card-header text-center">
+                        Reporte usuarios
+                    </div>
+                    <div class="card-body">
+                        <a th:href="@{/reportes/usuarios?tipo=vPdf}" class="btn btn-primary">
+                            <i class='fas fa-eye'></i><i class='fas fa-file-pdf'></i>
+                        </a>
+                        <a th:href="@{/reportes/usuarios?tipo=Pdf}" class="btn btn-success">
+                            <i class='fas fa-download'></i><i class='fas fa-file-pdf'></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header text-center">
+                        Reporte ventas
+                    </div>
+                    <div class="card-body">
+                        <a th:href="@{/reportes/venta?tipo=vPdf}" class="btn btn-primary">
+                            <i class='fas fa-eye'></i><i class='fas fa-file-pdf'></i>
+                        </a>
+                        <a th:href="@{/reportes/venta?tipo=Pdf}" class="btn btn-success">
+                            <i class='fas fa-download'></i><i class='fas fa-file-pdf'></i>
+                        </a>
+ 
+                    </div>
+                </div>                
+            </div>
+        </div>
+        </body>
+<div th:insert="~{template.html :: scripts}"></div>
+<div th:insert="~{template.html :: footer}"></div>
+
+</html>
