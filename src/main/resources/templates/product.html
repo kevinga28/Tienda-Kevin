@@ -47,8 +47,9 @@
                     <td><span th:text="${product.category.getDescripcion()}"></span></td>
                     <td><span th:text="${product.descripcion}"> </span></td>
                     <td><span th:text="${product.precio}"> </span></td>
-                    <td><img alt="..." class="card-img-top" th:src="${product.ruta_imagen}">
+                    <td><img alt="..." class="card-img-top" th:src="${product.ruta_imagen}">   
                     </td>
+                    <td><span th:text="${product.existencias}"> </span></td>
                     <td>
                         <button class="btn btn-primary open-modal" data-bs-target="#productModal" data-bs-toggle="modal"
                                 th:attr="idProduct=${product.id}" type="button">

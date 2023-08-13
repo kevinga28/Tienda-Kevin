@@ -4,13 +4,24 @@
  */
 package com.tienda.service.impl;
 
+import com.tienda.db.IFacturaRepository;
+import com.tienda.db.IProductRepository;
+import com.tienda.db.IVentaRepository;
+import com.tienda.entities.Factura;
 import java.util.List;
 import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 
 import com.tienda.entities.Item;
+import com.tienda.entities.Product;
+import com.tienda.entities.Usuario;
+import com.tienda.entities.Venta;
 import com.tienda.service.IItemService;
+import com.tienda.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Service
 public class ItemService implements IItemService {
@@ -85,11 +96,56 @@ public class ItemService implements IItemService {
      * En un futuro sería el proceso de generar la facturación...
      * por ahora sólo borra los elementos del carrito
      */
+       @Autowired
+    private IUserService userService;
+
+    @Autowired
+    private IFacturaRepository facturaRepository ;
+    @Autowired
+    private IVentaRepository ventaRepository ;
+    @Autowired
+    private IProductRepository productRepository;
+
     @Override
     public void facturar() {
-        for (Item i : ListItems) {
-            // Proceso de facturación...
+        System.out.println("Facturando");
+
+        //Se obtiene el usuario autenticado
+        String username;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails userDetails) {
+            username = userDetails.getUsername();
+        } else {
+            username = principal.toString();
         }
+
+        if (username.isBlank()) {
+            return;
+        }
+
+        Usuario user = userService.getUsuarioPorUsername(username);
+
+        if (user == null) {
+            return;
+        }
+
+        Factura factura = new Factura(user.getIdUsuario());
+        factura = facturaRepository.save(factura);
+
+        double total = 0;
+        for (Item i : ListItems) {
+            System.out.println("Producto: " + i.getDescripcion()
+                    + " Cantidad: " + i.getCantidad()
+                    + " Total: " + i.getPrecio() * i.getCantidad());
+            Venta venta = new Venta(factura.getIdFactura(), i.getId(), i.getPrecio(), i.getCantidad());
+            ventaRepository.save(venta);
+            Product producto = productRepository.getReferenceById(i.getId());
+            producto.setExistencias(producto.getExistencias()-i.getCantidad());
+            productRepository.save(producto);
+            total += i.getPrecio() * i.getCantidad();
+        }
+        factura.setTotal(total);
+        facturaRepository.save(factura);
         ListItems.clear();
     }
-} /* Fin de la clase CarritoServiceImpl */
+}

@@ -18,9 +18,11 @@ import com.tienda.service.IItemService;
 import com.tienda.service.IProductService;
 import com.tienda.service.impl.ItemService;
 import com.tienda.service.impl.ProductService;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
+@RequestMapping("/carrito")
 public class CarritoController {
 
     @Autowired
@@ -29,8 +31,8 @@ public class CarritoController {
     private IProductService articuloService;
 
     //Para ver el carrito
-    @GetMapping("/carrito")
-    public String inicio(Model model) {
+    @GetMapping("/carrito/listado")
+    public String index(Model model) {
         var items = itemService.getItems();
         model.addAttribute("items", items);
         var carritoTotalVenta = 0;
@@ -38,11 +40,11 @@ public class CarritoController {
             carritoTotalVenta += (i.getCantidad() * i.getPrecio());
         }
         model.addAttribute("carritoTotal", carritoTotalVenta);
-        return "/carrito";
+        return "/carrito/listado";
     }
 
-    //Para Agregar un articulo al carrito
-    @GetMapping("/carrito/agregar/{idArticulo}")
+//    Para Agregar un articulo al carrito
+    @GetMapping("/carrito/agregar/{id}")
     public ModelAndView agregarItem(Model model, Item item) {
         Item item2 = itemService.getItem(item);
         if (item2 == null) {
@@ -64,7 +66,7 @@ public class CarritoController {
     }
 
     //Para mofificar un articulo del carrito
-    @GetMapping("/carrito/modificar/{idArticulo}")
+    @GetMapping("/carrito/modificar/{id}")
     public String modificarItem(Item item, Model model) {
         item = itemService.getItem(item);
         model.addAttribute("item", item);
@@ -72,7 +74,7 @@ public class CarritoController {
     }
 
     //Para eliminar un elemento del carrito
-    @GetMapping("/carrito/eliminar/{idArticulo}")
+    @GetMapping("/carrito/eliminar/{id}")
     public String eliminarItem(Item item) {
         itemService.delete(item);
         return "redirect:/carrito";

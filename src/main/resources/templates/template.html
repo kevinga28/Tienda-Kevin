@@ -28,7 +28,7 @@
 <nav class="navbar navbar-expand-lg navbar-light shadow" th:fragment="header">
     <div class="container d-flex justify-content-between align-items-center">
 
-        <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
+        <a class="navbar-brand text-success logo h1 align-self-center" th:href="@{/}">
             Tienda de Kevin
         </a>
 
@@ -43,10 +43,13 @@
             <div class="flex-fill">
                 <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="@{/index}">Home</a>
+                        <a class="nav-link" th:href="@{/}">Home</a>
                     </li>
                     <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')" >
                         <a class="nav-link"th:href="@{/admin}">Admin</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" th:href="@{/carrito}">Carrito</a>
                     </li>
 
                 </ul>

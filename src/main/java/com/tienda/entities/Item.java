@@ -1,9 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.tienda.entities;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper=false)
 public class Item extends Product {
     private int cantidad; // Almacenar la cantidad de items de un articulo
 
@@ -29,4 +31,5 @@ public class Item extends Product {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+  
 }
