@@ -20,7 +20,7 @@ public class Factura implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_factura")
     private Long idFactura;
-    private Long idUsuario;
+    private Integer idUsuario;
     private Date fecha;
     private double total;
     private int estado;
@@ -29,7 +29,7 @@ public class Factura implements Serializable {
     public Factura() {
     }
 
-    public Factura(Long idUSuario) {
+    public Factura(Integer idUSuario) {
         this.idUsuario = idUSuario;
         this.fecha = Calendar.getInstance().getTime();
         this.estado=1;

@@ -1,10 +1,11 @@
 
 package com.tienda.service;
 
+
 import com.tienda.entities.Usuario;
 import java.util.List;
 import org.springframework.security.core.userdetails.*;
-public interface IUserService {
+public interface IUserService extends IBaseService<Usuario, Integer> {
 
 
 

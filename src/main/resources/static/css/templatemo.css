@@ -76,12 +76,38 @@ html {
 }
 
 .bg-dark {
-  background-color: #323232;
+   background: linear-gradient(to bottom, #9ad9e2, #7fc7d5);
+  animation: gradientAnimation 5s ease infinite alternate;
 }
 
-.bg-light {
-  background-color: #f5f5f5;
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
 }
+.bg-light {
+  background: linear-gradient(135deg, #f5f5f5, #a8d6b8);
+  overflow: hidden; /* Para ocultar cualquier contenido que se extienda más allá del contenedor */
+}
+
+.bg-light::before {
+  content: "";
+  position: center;
+  top: -50%; /* Ajusta según sea necesario para el efecto deseado */
+  right: -50%; /* Ajusta según sea necesario para el efecto deseado */
+  bottom: -50%; /* Ajusta según sea necesario para el efecto deseado */
+  left: -50%; /* Ajusta según sea necesario para el efecto deseado */
+  background: radial-gradient(ellipse at center, rgba(168, 214, 184, 0.5), transparent);
+}
+
+
+
+
+
+
 
 .bg-black {
   background-color: #000000;

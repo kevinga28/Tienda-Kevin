@@ -5,6 +5,7 @@ import com.tienda.db.IRolRepository;
 import com.tienda.db.IUserRepository;
 import com.tienda.entities.Rol;
 import com.tienda.entities.Usuario;
+import com.tienda.service.IBaseService;
 import com.tienda.service.IUserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserService implements UserDetailsService, IUserService {
+public class UserService extends BaseService<Usuario, Integer>implements UserDetailsService, IUserService {
 
     private final IUserRepository userRepository;
     private final HttpSession session;
@@ -28,6 +29,7 @@ public class UserService implements UserDetailsService, IUserService {
     private final IRolRepository roleRepository;
 
     public UserService(IUserRepository userRepository, HttpSession session, IRolRepository roleRepository) {
+        super(userRepository);
         this.userRepository = userRepository;
         this.session = session;
         this.roleRepository = roleRepository;

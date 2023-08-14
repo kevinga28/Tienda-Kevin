@@ -53,6 +53,7 @@
                     </li>
 
                 </ul>
+                
             </div>
             <div class="navbar align-self-center d-flex">
                 <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
@@ -72,9 +73,15 @@
                     <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
                 </a>
                 <a class="nav-icon position-relative text-decoration-none" href="#">
-                    <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                    <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
-                </a>
+                        <i class="fas fa-user"></i><span sec:authentication="name">/</span>
+                    </a>
+                <a class="nav-item ">
+                                <form method="POST" th:action="@{/logout}">
+                                    <button class="btn btn-dark"><i class="fas fa-sign-out-alt"></i></button>
+                                </form>
+                            </a>
+                
+                
             </div>
         </div>
 
